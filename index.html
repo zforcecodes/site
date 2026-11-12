@@ -3,211 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="theme-color" content="#fbfbf9" />
     <meta
       name="description"
-      content="Meet ZFORCE: considered cricket gear, made for the next ball."
+      content="Meet the ZFORCE cricket ball lineup: red leather, white leather, and pink leather."
     />
-    <title>ZFORCE — Gear up. Game on.</title>
+    <title>ZFORCE — The next ball is yours</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <div class="page-shell">
-      <header class="site-header">
-        <a class="brand" href="#home" aria-label="ZFORCE home">
-          <svg class="brand-mark" viewBox="0 0 42 42" role="img" aria-label="Z">
-            <path d="M7 8h28L12 33h23" />
-            <path d="M8 36 35 6" />
-          </svg>
-          <span>ZFORCE<span class="brand-period">.</span></span>
-        </a>
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="#gear">THE GEAR</a>
-          <a href="#next-up">NEXT UP</a>
+    <main class="landing" id="home">
+      <header class="topbar">
+        <a class="wordmark" href="#home" aria-label="ZFORCE home">ZFORCE</a>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="#balls">THE BALLS</a>
+          <a href="#coming-soon">COMING SOON</a>
           <a href="#contact">CONTACT</a>
         </nav>
-        <a class="header-cta" href="#contact">GET IN TOUCH <span>↗</span></a>
+        <a class="contact-link" href="mailto:zforcesportz@gmail.com" aria-label="Email ZFORCE">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v13H4zM4.5 6l7.5 6 7.5-6" /></svg>
+        </a>
       </header>
 
-      <main>
-        <section class="hero" id="home">
-          <div class="hero-copy">
-            <p class="eyebrow"><span class="live-dot"></span> BUILT FOR THE GAME</p>
-            <h1>OWN<br />THE <span>BOUNDARY.</span></h1>
-            <p class="hero-description">
-              Good games start with good gear. Meet the ZFORCE leather and cork balls,
-              made for the moments that keep you coming back.
-            </p>
-            <div class="hero-actions">
-              <a class="button button-dark" href="#gear">EXPLORE THE GEAR <span>↓</span></a>
-              <span class="hero-note">MADE FOR THE MIDDLE.</span>
-            </div>
-            <div class="hero-proof">
-              <span class="proof-icon">✳</span>
-              <span>READY WHEN YOU ARE</span>
-              <span class="proof-line"></span>
-              <span>EST. FOR THE NEXT OVER</span>
-            </div>
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> MADE FOR THE NEXT OVER</p>
+          <h1 id="page-title">ZFORCE</h1>
+          <p class="intro-description">
+            Red leather. White leather. Pink leather.<br />
+            Pick your ball. Make it yours.
+          </p>
+        </div>
+      </section>
+
+      <section class="showcase" aria-label="Interactive three-dimensional ZFORCE cricket balls">
+        <div class="scene-note scene-note-left"><span>01</span> RED LEATHER</div>
+        <div class="scene-note scene-note-center"><span>02</span> WHITE LEATHER</div>
+        <div class="scene-note scene-note-right"><span>03</span> PINK LEATHER</div>
+        <div
+          id="ball-stage"
+          class="ball-stage"
+          data-zforce-ball
+          data-colors="red,white,pink"
+          data-quality="low"
+        >
+          <div class="stage-fallback" aria-hidden="true">
+            <span class="fallback-ball fallback-red"></span>
+            <span class="fallback-ball fallback-white"></span>
+            <span class="fallback-ball fallback-pink"></span>
           </div>
+        </div>
+        <p class="drag-hint"><span>↔</span> DRAG THE BALLS</p>
+      </section>
 
-          <div class="hero-visual" aria-label="Interactive three-dimensional cricket ball">
-            <div class="visual-grid"></div>
-            <div class="visual-index"><span>01</span> / THE FIRST OVER</div>
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
-            <div id="ball-stage" class="ball-stage">
-              <div class="stage-fallback" aria-hidden="true">
-                <span class="fallback-ball"></span>
-              </div>
-            </div>
-            <div class="ball-caption"><span class="caption-dot"></span><span id="ball-label">THE RED LEATHER</span></div>
-            <div class="drag-note"><span>↔</span> DRAG TO SPIN</div>
-            <div class="visual-side-note">ZFORCE / CRICKET DIVISION</div>
-          </div>
+      <section class="start-playing" aria-label="Explore the ZFORCE balls">
+        <a class="play-link" href="#balls">FIND YOUR BALL <span>↓</span></a>
+        <p>THREE BALLS. YOUR NEXT GAME.</p>
+      </section>
 
-          <a class="scroll-cue" href="#gear" aria-label="Scroll to the gear">
-            <span>SCROLL TO EXPLORE</span><i></i>
-          </a>
-        </section>
+      <section class="ball-list" id="balls" aria-labelledby="balls-title">
+        <div class="section-topline"><span>THE LINEUP</span><span>01 — 03</span></div>
+        <h2 id="balls-title">PICK YOUR<br />PLAY.</h2>
+        <div class="ball-options">
+          <button class="ball-option is-selected" type="button" data-ball="red" aria-pressed="true">
+            <span class="option-index">01</span>
+            <span class="option-name">RED LEATHER</span>
+            <span class="option-note">THE CLASSIC</span>
+            <span class="option-arrow">↗</span>
+          </button>
+          <button class="ball-option" type="button" data-ball="white" aria-pressed="false">
+            <span class="option-index">02</span>
+            <span class="option-name">WHITE LEATHER</span>
+            <span class="option-note">UNDER THE LIGHTS</span>
+            <span class="option-arrow">↗</span>
+          </button>
+          <button class="ball-option" type="button" data-ball="pink" aria-pressed="false">
+            <span class="option-index">03</span>
+            <span class="option-name">PINK LEATHER</span>
+            <span class="option-note">THE NEW SHADE</span>
+            <span class="option-arrow">↗</span>
+          </button>
+        </div>
+        <p class="lineup-footnote">SELECT A BALL TO BRING IT INTO FOCUS. DRAG TO SPIN.</p>
+      </section>
 
-        <section class="ticker" aria-label="ZFORCE brand message">
-          <div class="ticker-track">
-            <span>PLAY HARD</span><b>✳</b><span>STAY READY</span><b>✳</b><span>OWN THE MOMENT</span><b>✳</b>
-            <span>PLAY HARD</span><b>✳</b><span>STAY READY</span><b>✳</b><span>OWN THE MOMENT</span><b>✳</b>
-          </div>
-        </section>
+      <section class="coming-soon" id="coming-soon">
+        <div>
+          <p class="eyebrow"><span></span> STILL IN PLAY</p>
+          <h2>COMING<br />UP NEXT.</h2>
+        </div>
+        <div class="coming-list">
+          <p><span>04</span> TENNIS BALLS <i>COMING SOON</i></p>
+          <p><span>05</span> GAME-DAY SHOES <i>COMING SOON</i></p>
+        </div>
+      </section>
 
-        <section class="gear-section section-wrap" id="gear">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow section-eyebrow">01 / THE LINEUP</p>
-              <h2>MEET YOUR<br /><span>NEW MATCH.</span></h2>
-            </div>
-            <p class="section-intro">
-              Three ways to get the game going. Find the ball that feels right for your
-              next innings.
-            </p>
-          </div>
+      <section class="contact-section" id="contact">
+        <div class="contact-intro">
+          <p class="eyebrow"><span></span> YOUR NEXT MOVE</p>
+          <h2>LET'S<br />TALK.</h2>
+          <p>Questions about the balls? Get in touch. We’d love to hear from you.</p>
+          <a href="mailto:zforcesportz@gmail.com">ZFORCESPORTZ@GMAIL.COM <span>↗</span></a>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <p class="form-heading">SEND US A MESSAGE <span>↙</span></p>
+          <label>
+            <span>YOUR NAME</span>
+            <input name="name" autocomplete="name" placeholder="Name" required maxlength="100" />
+          </label>
+          <label>
+            <span>YOUR EMAIL</span>
+            <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254" />
+          </label>
+          <label>
+            <span>YOUR MESSAGE</span>
+            <textarea name="message" rows="3" placeholder="What are you looking for?" required maxlength="2000"></textarea>
+          </label>
+          <button class="send-button" type="submit">SEND MESSAGE <span>↗</span></button>
+          <p class="form-note" id="form-note" aria-live="polite">
+            Your email app will open with your message addressed to ZFORCE.
+          </p>
+        </form>
+      </section>
 
-          <div class="product-grid">
-            <article class="product-card product-card-red">
-              <div class="product-art" aria-hidden="true">
-                <div class="product-ball product-ball-red"><span></span></div>
-                <span class="product-art-index">ZF / 01</span>
-                <span class="product-art-ring"></span>
-              </div>
-              <div class="product-details">
-                <div><p class="product-category">LEATHER BALL · RED</p><h3>THE RED ONE</h3></div>
-                <button class="product-select" type="button" data-ball="red" aria-label="View red leather ball">↗</button>
-              </div>
-              <p class="product-description">Classic feel. Match-day energy. Ready to make its mark.</p>
-            </article>
-
-            <article class="product-card product-card-white">
-              <div class="product-art" aria-hidden="true">
-                <div class="product-ball product-ball-white"><span></span></div>
-                <span class="product-art-index">ZF / 02</span>
-                <span class="product-art-ring"></span>
-              </div>
-              <div class="product-details">
-                <div><p class="product-category">LEATHER BALL · WHITE</p><h3>THE WHITE ONE</h3></div>
-                <button class="product-select" type="button" data-ball="white" aria-label="View white leather ball">↗</button>
-              </div>
-              <p class="product-description">Clean look. Clear skies. One more over under the lights.</p>
-            </article>
-
-            <article class="product-card product-card-cork">
-              <div class="product-art" aria-hidden="true">
-                <div class="product-ball product-ball-cork"><span></span></div>
-                <span class="product-art-index">ZF / 03</span>
-                <span class="product-art-ring"></span>
-              </div>
-              <div class="product-details">
-                <div><p class="product-category">CORK BALL</p><h3>THE CORK ONE</h3></div>
-                <button class="product-select" type="button" data-ball="cork" aria-label="View cork ball">↗</button>
-              </div>
-              <p class="product-description">Easy to get into. Hard to put down. Bring everyone in.</p>
-            </article>
-          </div>
-          <p class="gear-footnote"><span>✳</span> PICK YOUR BALL. WE'LL TAKE IT FROM THERE.</p>
-        </section>
-
-        <section class="coming-section" id="next-up">
-          <div class="coming-wrap">
-            <div class="coming-copy">
-              <p class="eyebrow"><span class="live-dot"></span> THE NEXT CHAPTER</p>
-              <h2>MORE GAME.<br /><span>MORE TO COME.</span></h2>
-              <p>
-                We're working on the next pieces of the kit. Keep your eyes on the
-                boundary.
-              </p>
-            </div>
-            <div class="coming-list">
-              <article class="coming-item">
-                <span class="coming-number">01</span>
-                <span class="coming-icon tennis-icon" aria-hidden="true"><i></i></span>
-                <div><p>COMING SOON</p><h3>TENNIS BALLS</h3></div>
-                <span class="coming-arrow">↗</span>
-              </article>
-              <article class="coming-item">
-                <span class="coming-number">02</span>
-                <span class="coming-icon shoe-icon" aria-hidden="true"><i></i></span>
-                <div><p>COMING SOON</p><h3>GAME-DAY SHOES</h3></div>
-                <span class="coming-arrow">↗</span>
-              </article>
-              <span class="coming-stamp">STAY<br />TUNED<span>✳</span></span>
-            </div>
-          </div>
-        </section>
-
-        <section class="contact-section section-wrap" id="contact">
-          <div class="contact-heading">
-            <p class="eyebrow section-eyebrow">02 / YOUR MOVE</p>
-            <h2>LET'S TALK<br /><span>GAME.</span></h2>
-            <p>
-              Looking for gear, stocking up, or just curious? Drop us a line. We'll
-              take it from here.
-            </p>
-            <a class="email-link" href="mailto:zforcesportz@gmail.com">
-              <span class="email-icon">↗</span> ZFORCESPORTZ@GMAIL.COM
-            </a>
-          </div>
-          <form class="contact-form" id="contact-form">
-            <div class="form-topline"><span>THE CONTACT FORM</span><span>WE'D LOVE TO HEAR FROM YOU ↙</span></div>
-            <label>
-              <span>YOUR NAME <i>*</i></span>
-              <input name="name" autocomplete="name" placeholder="How should we call you?" required maxlength="100" />
-            </label>
-            <label>
-              <span>EMAIL ADDRESS <i>*</i></span>
-              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254" />
-            </label>
-            <label>
-              <span>WHAT'S ON YOUR MIND? <i>*</i></span>
-              <textarea name="message" rows="3" placeholder="Tell us what you're looking for..." required maxlength="2000"></textarea>
-            </label>
-            <button class="button button-lime form-submit" type="submit">SEND YOUR MESSAGE <span>↗</span></button>
-            <p class="form-note" id="form-note" aria-live="polite">
-              Your email app will open with your message addressed to ZFORCE.
-            </p>
-          </form>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <a class="brand footer-brand" href="#home" aria-label="ZFORCE home">
-          <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true"><path d="M7 8h28L12 33h23" /><path d="M8 36 35 6" /></svg>
-          <span>ZFORCE<span class="brand-period">.</span></span>
-        </a>
-        <span class="footer-tagline">GEAR UP. GAME ON.</span>
-        <span class="footer-copyright">© <span id="year"></span> ZFORCE SPORTZ</span>
+      <footer class="footer">
+        <a class="wordmark" href="#home">ZFORCE</a>
+        <span>THE NEXT BALL IS YOURS.</span>
+        <a href="mailto:zforcesportz@gmail.com">GET IN TOUCH ↗</a>
       </footer>
-    </div>
+    </main>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 # ZFORCE Sportz
 
-A responsive, single-page sports gear site featuring an interactive Three.js cricket ball showcase, three currently available ball types, a coming-soon section for tennis balls and shoes, and an email enquiry form.
+A responsive, Matchball-inspired sports gear site featuring three interactive, procedurally textured Three.js cricket balls. The ball showcase uses the renderer in `src/zforce-ball.js`, including its leather grain, recessed seam, stitched thread, stamped ZFORCE crest, studio reflections, and bounce animation.
 
 ## Run locally
 
@@ -14,6 +14,8 @@ npm run dev
 Open the local URL printed by Vite. Create a production build with `npm run build`.
 
 The enquiry form opens the visitor's default email application with the message addressed to `zforcesportz@gmail.com`. It does not silently store or transmit visitor data; visitors must send the prepared email.
+
+The hero mounts `src/zforce-ball.js` on the `#ball-stage` element. Three.js is bundled with the application, not loaded from a third-party CDN. The renderer creates red, white, and pink balls with procedural leather and stitching textures; selecting a lineup item tosses its ball, and clicking a ball spins it.
 
 ## Publish on GitHub Pages
 
