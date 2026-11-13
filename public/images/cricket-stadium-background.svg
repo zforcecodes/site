@@ -41,16 +41,6 @@
   <path d="M548 1000 705 546h190l157 454z" stroke="#FFF1C7" stroke-width="5"/>
   <path d="m670 647 260 0M630 765h340M589 882h423" stroke="#FFF5D5" stroke-width="5" opacity=".9"/>
   <path d="m747 603 106 0M726 626h148" stroke="#FFF7DF" stroke-width="5"/>
-  <g fill="#F28A39">
-    <path d="M776 566h10v45h-10zM795 558h10v53h-10zM814 566h10v45h-10z"/>
-    <path d="M755 606h91v6h-91z"/>
-    <path d="M752 604h11v6h-11zM839 604h11v6h-11z"/>
-  </g>
-  <path d="M760 567h7v35h-7zM833 567h7v35h-7z" fill="#FFE5B5"/>
-  <g fill="#F28A39">
-    <path d="M752 750h8v28h-8zM769 746h8v32h-8zM786 750h8v28h-8z"/>
-    <path d="M744 776h58v5h-58z"/>
-  </g>
   <path d="M0 600 0 319M1600 600V319" stroke="#273261" stroke-width="9"/>
   <path d="M0 319h106M1494 319h106" stroke="#273261" stroke-width="8"/>
   <path d="M25 295v47m15-47v47m15-47v47m15-47v47m15-47v47m1430-47v47m15-47v47m15-47v47m15-47v47m15-47v47" stroke="#3A456D" stroke-width="5"/>
