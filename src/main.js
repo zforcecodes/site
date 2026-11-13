@@ -40,7 +40,9 @@ document.querySelector("#contact-form").addEventListener("submit", (event) => {
 });
 
 function showBallStage() {
-  stage.__zforce.ready.then(() => stage.classList.add("is-ready"));
+  stage.__zforce.ready
+    .then(() => stage.classList.add("is-ready"))
+    .catch((error) => console.error("Could not load the ZFORCE ball display:", error));
 }
 
 if (stage.__zforce) {

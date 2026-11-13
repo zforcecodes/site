@@ -14,6 +14,7 @@ import * as THREE from "three";
  *   quality       'high' (2048px textures) | 'low' (1024px) — default picks by device
  *   interactive   click/tap a ball to spin it (default true)
  *   shadow        soft contact shadow (default true)
+ *   logoUrl       URL of a transparent ZFORCE logo image
  *
  * Three.js is bundled with the ZFORCE site.
  */
@@ -30,76 +31,61 @@ import * as THREE from "three";
     pink:  { leather: [232, 78, 140], thread: [28, 26, 30],    logo: [244, 210, 120] }
   };
 
+  function loadLogoImage(url) {
+    if (!url) return Promise.reject(new Error('ZforceBall: logoUrl is required'));
+    return new Promise(function (resolve, reject) {
+      var image = new Image();
+      image.onload = function () { resolve(image); };
+      image.onerror = function () { reject(new Error('ZforceBall: could not load logo image: ' + url)); };
+      image.src = url;
+    });
+  }
+
   /* ------------------------------------------------------------------ *
-   * Logo (drawn once to a canvas, used as an alpha mask)
+   * Logo alpha mask
    * ------------------------------------------------------------------ */
-  function drawLogo(size) {
+  function drawLogo(size, image) {
     var c = document.createElement('canvas');
     c.width = c.height = size;
     var g = c.getContext('2d');
-    var s = size / 1024;
-    g.scale(s, s);
-    var cx = 512, cy = 512;
+    var center = size / 2;
     g.fillStyle = g.strokeStyle = '#fff';
 
-    // rings
-    g.lineWidth = 12; g.beginPath(); g.arc(cx, cy, 490, 0, Math.PI * 2); g.stroke();
-    g.lineWidth = 8;  g.beginPath(); g.arc(cx, cy, 405, 0, Math.PI * 2); g.stroke();
+    g.lineWidth = 12;
+    g.beginPath(); g.arc(center, center, size * 0.478, 0, Math.PI * 2); g.stroke();
+    g.lineWidth = 8;
+    g.beginPath(); g.arc(center, center, size * 0.396, 0, Math.PI * 2); g.stroke();
 
-    // "PREMIUM BALLS" along the top arc
-    var text = 'PREMIUM BALLS', r = 447, track = 6;
-    g.font = '700 58px "Montserrat", "Helvetica Neue", Arial, sans-serif';
-    g.textAlign = 'center'; g.textBaseline = 'middle';
+    var text = 'PREMIUM BALLS', radius = size * 0.437, tracking = 6;
+    g.font = '700 58px Arial, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
     var widths = [], total = 0;
-    for (var i = 0; i < text.length; i++) { var w = g.measureText(text[i]).width + track; widths.push(w); total += w; }
-    var a = -Math.PI / 2 - (total / r) / 2;
-    var start = a;
+    for (var i = 0; i < text.length; i++) {
+      var letterWidth = g.measureText(text[i]).width + tracking;
+      widths.push(letterWidth);
+      total += letterWidth;
+    }
+    var angle = -Math.PI / 2 - (total / radius) / 2;
     for (i = 0; i < text.length; i++) {
-      var aa = a + (widths[i] / 2) / r;
+      var letterAngle = angle + (widths[i] / 2) / radius;
       g.save();
-      g.translate(cx + r * Math.cos(aa), cy + r * Math.sin(aa));
-      g.rotate(aa + Math.PI / 2);
+      g.translate(center + radius * Math.cos(letterAngle), center + radius * Math.sin(letterAngle));
+      g.rotate(letterAngle + Math.PI / 2);
       g.fillText(text[i], 0, 0);
       g.restore();
-      a += widths[i] / r;
+      angle += widths[i] / radius;
     }
-    [start - 0.09, a + 0.09].forEach(function (d) {
-      g.beginPath(); g.arc(cx + r * Math.cos(d), cy + r * Math.sin(d), 10, 0, Math.PI * 2); g.fill();
-    });
 
-    // "— Est.2015 —"
-    g.font = '600 62px "Montserrat", "Helvetica Neue", Arial, sans-serif';
-    g.fillText('Est.2015', cx, cy + 300);
+    g.font = '600 52px Arial, sans-serif';
+    g.fillText('Est. 2015', center, center + size * 0.293);
     g.lineWidth = 8;
-    g.beginPath(); g.moveTo(cx - 270, cy + 300); g.lineTo(cx - 160, cy + 300); g.stroke();
-    g.beginPath(); g.moveTo(cx + 160, cy + 300); g.lineTo(cx + 270, cy + 300); g.stroke();
+    g.beginPath(); g.moveTo(center - 270, center + size * 0.293); g.lineTo(center - 160, center + size * 0.293); g.stroke();
+    g.beginPath(); g.moveTo(center + 160, center + size * 0.293); g.lineTo(center + 270, center + size * 0.293); g.stroke();
 
-    // Complete, bold "Z" — top bar, diagonal, bottom bar — slanted like "FORCE",
-    // standing on the same baseline and a little taller (drop-cap style).
-    var BASE = 640, SLANT = 0.2;
-    var zx0 = 148, zx1 = 372, zy0 = 352, zy1 = BASE, zt = 60, zd = 86;
-    var Z = [
-      [zx0, zy0], [zx1, zy0], [zx1, zy0 + zt],            // top bar
-      [zx0 + zd, zy1 - zt],                                // diagonal down to bottom bar
-      [zx1, zy1 - zt], [zx1, zy1], [zx0, zy1], [zx0, zy1 - zt], // bottom bar
-      [zx1 - zd, zy0 + zt],                                // diagonal back up
-      [zx0, zy0 + zt]
-    ];
-    g.beginPath();
-    Z.forEach(function (p, k) {
-      var X = p[0] + SLANT * (BASE - p[1]), Y = p[1];      // same italic slant as the text
-      k ? g.lineTo(X, Y) : g.moveTo(X, Y);
-    });
-    g.closePath(); g.fill();
-
-    // "FORCE" — bold condensed, same slant, sharing the Z's baseline
-    g.save();
-    g.font = '400 240px Impact, "Haettenschweiler", "Arial Narrow Bold", "Arial Black", sans-serif';
-    g.textAlign = 'left'; g.textBaseline = 'alphabetic';
-    var tw = g.measureText('FORCE').width, target = 470;
-    g.setTransform(s * target / tw, 0, -SLANT * s * 0.8, s * 0.8, 396 * s, BASE * s);
-    g.fillText('FORCE', 0, 0);
-    g.restore();
+    var width = size * 0.66;
+    var height = width * image.naturalHeight / image.naturalWidth;
+    g.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
     return c;
   }
 
@@ -123,13 +109,13 @@ import * as THREE from "three";
   }
 
   var maskCache = {};
-  function buildMasks(W) {
+  function buildMasks(W, logoImage) {
     if (maskCache[W]) return maskCache[W];
     var H = W / 2, N = W * H;
     var groove = new Float32Array(N), stitch = new Float32Array(N), logo = new Float32Array(N),
         grain = new Float32Array(N), band = new Float32Array(N), hole = new Float32Array(N);
 
-    var LW = 1024, logoCanvas = drawLogo(LW);
+    var LW = 1024, logoCanvas = drawLogo(LW, logoImage);
     var ld = logoCanvas.getContext('2d').getImageData(0, 0, LW, LW).data;
     function sampleLogo(fx, fy) {
       var x0 = fx | 0, y0 = fy | 0;
@@ -314,8 +300,9 @@ import * as THREE from "three";
 
     if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
 
-    api.ready = loadThree().then(function (THREE) {
+    api.ready = Promise.all([loadThree(), loadLogoImage(opts.logoUrl || el.dataset.logo)]).then(function (dependencies) {
       if (state.destroyed) return;
+      var THREE = dependencies[0], logoImage = dependencies[1];
       var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
       renderer.setPixelRatio(Math.min(global.devicePixelRatio || 1, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -335,7 +322,7 @@ import * as THREE from "three";
       scene.add(new THREE.AmbientLight(0xffffff, 0.15));
 
       var camera = new THREE.PerspectiveCamera(28, 1, 0.1, 200);
-      var masks = buildMasks(texW);
+      var masks = buildMasks(texW, logoImage);
       var shared = sharedMaps(THREE, masks);
       var aniso = renderer.capabilities.getMaxAnisotropy();
       shared.bump.anisotropy = shared.orm.anisotropy = aniso;
@@ -518,6 +505,7 @@ import * as THREE from "three";
       if (ds.restitution) o.restitution = parseFloat(ds.restitution);
       if (ds.restTime) o.restTime = parseFloat(ds.restTime);
       if (ds.quality) o.quality = ds.quality;
+      if (ds.logo) o.logoUrl = ds.logo;
       nd.__zforce = mount(nd, o);
     }
   }

@@ -17,7 +17,7 @@ Selecting a ball updates its product details and enquiry link. The contact form 
 
 The hero mounts `src/zforce-ball.js` on the `#ball-stage` element. Three.js is bundled with the application, not loaded from a third-party CDN. The renderer creates red, white, and pink balls with procedural leather and stitching textures; selecting a lineup item tosses its ball, and clicking a ball spins it.
 
-The stadium and pitch artwork is an original local 2D vector illustration used as the 3D ball showcase backdrop. The header and footer use a close crop of the supplied ZFORCE logo, while the cricket balls retain their existing badge artwork.
+The stadium and pitch artwork is an original local 2D vector illustration used as the 3D ball showcase backdrop. The header and footer use a close crop of the supplied ZFORCE logo; the balls feature the same wordmark inside a gold PREMIUM BALLS badge.
 
 ## Publish on GitHub Pages
 
